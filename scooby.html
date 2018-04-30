@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Scooby-doo</title>
+</head>
+<body>
+    <section>
+<div class="panel">
+    <div id="form-inputs">
+        <form action="#">
+            <span id="birthday-span">Scoobify</span>
+            <input type="text" name="word" id="word" placeholder="Enter word to scoobify" required>
+            <input type="submit" id="btn" value="Scoobify">
+        </form>
+
+        <label for="" class="center-word label-text" id="label"></label>
+    </div>
+</div>
+    </section>
+    <script>
+    document.getElementById('btn').addEventListener("click", (event) => {
+        let theword = document.getElementById("word").value;
+        let position;
+        let splitWordsBySpace = theword.split(' ');
+        let scoobified = '';
+        let shouldScoobify = false;
+        let newword = '';
+        
+        for(let i = 0 ; i < splitWordsBySpace.length; i += 1) {
+            let singleWord = [...splitWordsBySpace[i]];
+            
+            
+            // check if each character in the word is a vowel
+            for (let j = 0; j< singleWord.length; j += 1) {
+                if (singleWord[j] === 'a' || singleWord[j] === 'e' || singleWord[j] === 'i' || singleWord[j] === 'o' || singleWord[j] === 'u' ) {
+                position =j;
+                shouldScoobify = true;
+                break;    
+                }
+            }
+            if (shouldScoobify) {
+                newword = splitWordsBySpace[i].substr(position)
+                newword = 'r'+ newword;
+                if(i === 0) {
+                    scoobified = scoobified.concat(newword);    
+                }
+                else {
+                    scoobified = scoobified + ' ' + newword;
+                }
+            }
+            // Don't scoobify words without vowel
+            else {
+                if(i === 0) {
+                    // check if the word is in the first position
+                    let oldword = splitWordsBySpace[i].toString();
+                    scoobified = scoobified.concat(oldword)
+                }
+                else {
+                    // Add a space before the word if it is not in the first position or 
+                    // if the word does not begin the sentence
+                    let oldword = splitWordsBySpace[i].toString();
+                    scoobified = scoobified+ ' '+ oldword;
+                }
+                
+            }
+            
+            shouldScoobify = false;
+        }
+        document.getElementById('label').innerHTML = scoobified;
+        event.preventDefault();
+    });
+    </script>
+</body>
+</html>

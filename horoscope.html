@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Horoscope</title>
+</head>
+<body>
+    <section>
+        <div class="showcase">
+            <div id="form-inputs">
+                    <form action="#">
+                       <span id="birthday-span">Birthday:</span> 
+                        <input type="text" name="bday" id="thedate" placeholder="Enter your birthday in this format DD-MM" required  maxlength="5" minlength="5">
+                        <input type="submit" id="submit" value="View Horoscope">
+                      </form>
+                      
+                <label for="" class="center-word label-text" id="label"></label>
+            </div>
+        </div>
+    </section>
+    <script>
+    document.getElementById('submit').addEventListener('click', (event) => {
+        
+        let datePattern = /[0-3]{1}[0-9]{1}-[0-1]{1}[0-9]{1}$/;
+        let regE = new RegExp(datePattern);
+        let dayAndMonth = document.getElementById('thedate').value;
+        // let theDay = parseInt(dayAndMonth.slice(0,2),10);
+        // let theMonth = parseInt(dayAndMonth.slice(3,5),10) ;
+        let theDay = Number(dayAndMonth.slice(0,2));
+        let theMonth = Number(dayAndMonth.slice(3,5)) ;
+        let theLabel = document.getElementById('label');
+        let result = regE.test(dayAndMonth);
+       // theDay = Number(theDay);
+       // theMonth = Number(theMonth);
+        if (!result || theMonth > 12 || theDay > 31 || (theMonth === 2 && theDay > 29) ) {
+            theLabel.innerHTML = 'Invalid date';
+            e.preventDefault();
+            return false;
+        }
+        if(dayAndMonth === null) {
+            theLabel.innerHTML = '';
+        }
+        
+        if((theMonth == 1 && theDay <= 20) || (theMonth == 12 && theDay >=22)) {
+          theLabel.innerHTML = zodiacs.capricorn;
+        } else if ((theMonth == 1 && theDay >= 21) || (theMonth == 2 && theDay <= 18)) {
+            theLabel.innerHTML = zodiacs.aquarius;
+        } else if((theMonth == 2 && theDay >= 19) || (theMonth == 3 && theDay <= 20)) {
+            theLabel.innerHTML = zodiacs.pisces;
+        } else if((theMonth == 3 && theDay >= 21) || (theMonth == 4 && theDay <= 20)) {
+            theLabel.innerHTML = zodiacs.aries;
+        } else if((theMonth == 4 && theDay >= 21) || (theMonth == 5 && theDay <= 20)) {
+            theLabel.innerHTML = zodiacs.taurus;
+        } else if((theMonth == 5 && theDay >= 21) || (theMonth == 6 && theDay <= 20)) {
+            theLabel.innerHTML = zodiacs.gemini;
+        } else if((theMonth == 6 && theDay >= 21) || (theMonth == 7 && theDay <= 22)) {
+            theLabel.innerHTML = zodiacs.cancer;
+        } else if((theMonth == 7 && theDay >= 23) || (theMonth == 8 && theDay <= 23)) {
+            theLabel.innerHTML = zodiacs.leo;
+        } else if((theMonth == 8 && theDay >= 24) || (theMonth == 9 && theDay <= 23)) {
+            theLabel.innerHTML = zodiacs.virgo;
+        } else if((theMonth == 9 && theDay >= 24) || (theMonth == 10 && theDay <= 23)) {
+            theLabel.innerHTML = zodiacs.libra;
+        } else if((theMonth == 10 && theDay >= 24) || (theMonth == 11 && theDay <= 22)) {
+            theLabel.innerHTML = zodiacs.scorpio;
+        } else if((theMonth == 11 && theDay >= 23) || (theMonth == 12 && theDay <= 21)) {
+            theLabel.innerHTML = zodiacs.sagittarius;
+        }
+        else {
+            theLabel.innerHTML = '';
+        }
+        event.preventDefault();
+    });    
+    
+    const zodiacs = {
+    'capricorn':'CAPRICON - You could be most effective behind the scenes as a secret master rather than as the obvious leader or expert. Have a great time watching people spontaneously enjoy what you enjoy.',
+    'aquarius':'AQUARIUS - Your circle of friends and neighbors is getting bigger and bigger. The sun conjoins Uranus on the eighteenth. It iss time to be inventive and daring! Step into the spotlight at work or out in public during the April 29 full moon.',
+    'pisces':'PISCES - The moon-Neptune conjunction could make you very sensitive. Remember to honor your own boundaries. The new moon on the fifteenth shines on your finances and moneymaking possibilities. Create an option that did not seem possible a month or two ago.',
+    'aries':'ARIES - Surprise the world - and yourself - at the new moon on the fifteenth. Start something new that expresses a usually hidden side of yourself. The Mars-Pluto conjunction on April 26 could ignite tempers. Avoid conflict and put passion to positive use. ',
+    'taurus':'TAURUS - Listen to your body more closely around the April new moon.',
+    'gemini':'GEMINI - The sun-Mercury conjunction on April 1 lets you be more playful and mischievous than ever. The new moon on the fifteenth is all about socializing. Go to the big arena concert and dance up a storm. Associate with the crowd and with people older, younger, and from different backgrounds. You will find that you have a lot in common. ',
+    'cancer':'CANCER - Around the new moon on April 15, your work or career situation might get knocked sideways but in a much better direction. You will be much happier for it. Hold on tight, and don not be shy about your own abilities or experience.',
+    'leo':'LEO - Life might get exciting, in a good way, around the April 15 new moon. The chance could materialize to go somewhere special or do something fantastic. Think “bucket list” quality, and don\'t think twice about grabbing the chance.',
+    'virgo':'VIRGO - The sun-Mercury conjunction on April 1 sets your intuition free. With the new moon on the fifteenth, you\'ll have all the answers to everybody else\'s problems. Let them ask first. You may not get involved in anyone\'s issues, but you can still learn a lot just by watching and listening',
+    'libra':'LIBRA - Venus trines Mars on April 10. Flirt away! Love could approach from an unexpected angle at the new moon on the fifteenth. Don\'t be blindsided by a romance that threatens to be beyond perfect.',
+    'scorpio':'SCORPIO - Listen to your body more closely around the April 15 new moon. If you don\'t get hyper or go too hard too fast, everything should be fine. Still, is your digestion trying to tell you something? Just listen. The Mars-Pluto conjunction on the twenty-sixth could be challenging for everyone.',
+    'sagittarius':'SAGITTARIUS -  You could be most effective behind the scenes as a secret master rather than as the obvious leader or expert. Have a great time watching people spontaneously enjoy what you enjoy. Finally, that same days sun-Saturn trine lets you accomplish a lot. '
+  }
+    </script>
+</body>
+</html>
